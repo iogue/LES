@@ -13,7 +13,7 @@ class Parque(models.Model):
     nome = models.CharField(db_column='Nome', max_length=255, blank=True, null=True, unique=True)  # Field name made lowercase.
     capacidade = models.IntegerField(db_column='Capacidade')  # Field name made lowercase.
     zonas = models.IntegerField(db_column='Zonas')  # Field name made lowercase.
-    estado = models.CharField(db_column='Estado', max_length=50, blank=True, null=True)
+    estado = models.CharField(db_column='Estado', max_length=50, default="Aberto")
     morada = models.CharField(db_column='Morada', max_length=255, blank=True, null=True, unique=True)  # Field name made lowercase.
     cidade = models.CharField(db_column='Cidade', max_length=60, blank=True, null=True)
     codigo_postal = models.CharField(max_length=5, blank=True, null=True)
@@ -121,7 +121,7 @@ class Lugar(models.Model):
     viaturaid = models.ForeignKey(Viatura, models.CASCADE, db_column='ViaturaID', null=True)  # Field name made lowercase.
     reservaid = models.ForeignKey(Reserva, models.CASCADE, db_column='ReservaID', null=True)  # Field name made lowercase.
     numero_do_lugar = models.IntegerField(db_column='Numero do lugar')  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    estado = models.CharField(db_column='Estado', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    estado = models.CharField(db_column='Estado', max_length=255, default="Disponivel")  # Field name made lowercase.
 
     def get_absolute_url(self):
         return f"/parque/{1}/zona/{self.zonaid.id}/lugar/{self.id}"

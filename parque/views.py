@@ -1,4 +1,3 @@
-from multiprocessing import context
 from django.shortcuts import get_object_or_404, render
 from django.views import View
 
@@ -10,7 +9,7 @@ from django.views.generic import (
     DeleteView
     )
 
-from .forms import ParqueModelForm, ZonaModelForm, LugarModelForm, ReclamacaoModelForm
+from .forms import ParqueModelForm, ZonaModelForm, LugarModelForm, ReclamacaoModelForm, ParqueModelFormCreate, LugarModelFormCreate
 from .models import Parque, Zona, Lugar, Reclamacao
 
 def index_view(request, *args, **kwargs):
@@ -48,7 +47,7 @@ class ReclamacaoCreateView(View):
 
 class ParqueCreateView(CreateView):
     template_name = 'parque/parque_create.html'
-    form_class = ParqueModelForm
+    form_class = ParqueModelFormCreate
     queryset = Parque.objects.all()
 
     def form_valid(self, form):
@@ -190,7 +189,7 @@ class LugarDetailView(DetailView):
 
 class LugarCreateView(CreateView):
     template_name = 'lugar/lugar_create.html'
-    form_class = LugarModelForm
+    form_class = LugarModelFormCreate
     model = Lugar
 
     def form_valid(self, form):
