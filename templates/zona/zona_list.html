@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for instance in object_list %}
+<p>-> <a href='{{ instance.get_absolute_url }}'>{{ instance.id }}</a> Lugares:{{ instance.lugares }}, 
+    <br>
+    Número da Zona:{{ instance.numero_da_zona }}
+    <br>
+    Tipo da Zona:{{ instance.tipo_de_zona }}
+</p>
+{% endfor %}
+
+<br>
+
+<form action="create/">
+    <input type="submit" value="Create a Zona" />
+</form>
+
+<br>
+
+<form action="../">
+    <input type="submit" value="Go Back" />
+</form>
+{% endblock %}

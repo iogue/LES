@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for instance in object_list %}
+<p>-> <a href='{{ instance.get_absolute_url }}'>{{ instance.id }}</a>
+    <br>
+    Número do Lugar:{{ instance.numero_do_lugar }}
+    <br>
+    Estado:{{ instance.estado }}
+</p>
+
+{% endfor %}
+
+<br>
+
+<form action="create/">
+    <input type="submit" value="Create Lugar" />
+</form>
+
+<br>
+
+<form action="../">
+    <input type="submit" value="Go Back" />
+</form>
+{% endblock %}

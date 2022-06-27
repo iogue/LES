@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p>Zonas: {{ object.numero_da_zona }}</p>
+<p>Lugares: {{ object.lugares }}</p>
+
+<hr>
+
+<form action="delete/">
+    <p>To delete go here:</p>
+    <input type="submit" value="Delete" />
+</form>
+
+<hr>
+
+<form action="update/">
+    <p>To update go here:</p>
+    <input type="submit" value="Update" />
+</form>
+
+<hr>
+
+<form action="lugar/">
+    <p>To see lugares go here:</p>
+    <input type="submit" value="Lugar" />
+</form>
+
+<br>
+
+<form action="../">
+    <input type="submit" value="Go Back" />
+</form>
+{% endblock %}
