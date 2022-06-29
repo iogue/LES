@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_tables2',
     'parque',
 ]
 
@@ -74,14 +75,20 @@ WSGI_APPLICATION = 'les.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'Bhg4ybEsQp',
+#         'USER': 'Bhg4ybEsQp',
+#         'PASSWORD': 'vP8CQ00v1K',
+#         'HOST': 'remotemysql.com',
+#         'PORT': '3306',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Bhg4ybEsQp',
-        'USER': 'Bhg4ybEsQp',
-        'PASSWORD': 'vP8CQ00v1K',
-        'HOST': 'remotemysql.com',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

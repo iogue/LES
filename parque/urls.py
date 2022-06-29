@@ -14,16 +14,11 @@ from parque.views import (
     LugarCreateView,
     LugarDetailView,
     LugarDeleteView,
-    LugarUpdateView,
-    ReclamacaoCreateView,
-    ReclamacaoListView
+    LugarUpdateView
 )
 
 app_name = 'parque'
 urlpatterns = [
-    path('reclamacao/', ReclamacaoListView.as_view(), name='reclamacao-list'),
-    path('reclamacao/create/', ReclamacaoCreateView.as_view(), name='reclamacao-create'),
-
     path('', ParqueListView.as_view(), name='parque-list'),
     path('<int:id>/', ParqueDetailView.as_view(), name='parque-detail'),
     path('create/', ParqueCreateView.as_view(), name='parque-create'),

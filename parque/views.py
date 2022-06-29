@@ -1,6 +1,5 @@
 import imp
 from django.shortcuts import get_object_or_404, render
-from django.views import View
 from django_tables2 import SingleTableView
 
 from django.views.generic import (
@@ -12,39 +11,12 @@ from django.views.generic import (
 
 from parque.tables import ParqueTable, ZonaTable, LugarTable
 
-from .forms import ParqueModelForm, ZonaModelForm, LugarModelForm, ReclamacaoModelForm, ParqueModelFormCreate, LugarModelFormCreate
-from .models import Parque, Zona, Lugar, Reclamacao
+from .forms import ParqueModelForm, ZonaModelForm, LugarModelForm, ParqueModelFormCreate, LugarModelFormCreate
+from .models import Parque, Zona, Lugar
 from . tables import ParqueTable
 
 def index_view(request, *args, **kwargs):
     return render(request, "home.html", {})
-
-
-class ReclamacaoListView(View):
-    template_name = 'reclamacao/reclamacao_list.html'
-    queryset = Reclamacao.objects.all()
-
-    def get(self, request, *args, **kwargs):
-        context = {"object_list": self.queryset}
-        return render(request, self.template_name, context)
-        
-
-class ReclamacaoCreateView(View):
-    template_name = 'reclamacao/reclamacao_create.html'
-    def get(self, request, *arg, **kwargs):
-        form = ReclamacaoModelForm()
-        context={"form": form}
-        return render(request, self.template_name, context)
-
-    def post(self, request, *arg, **kwargs):
-        form = ReclamacaoModelForm(request.POST)
-        if form.is_valid():
-            form.save()
-            form = ReclamacaoModelForm()
-        context={"form": form}
-        return render(request, self.template_name, context)
-
-
 
 #==================================================================================================
 #Parque
