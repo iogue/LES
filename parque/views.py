@@ -53,9 +53,6 @@ class ParqueCreateView(CreateView):
     def form_valid(self, form):
         return super().form_valid(form)
 
-    def get_success_url(self):
-        return '../'
-
 
 
 class ParqueListView(ListView):
