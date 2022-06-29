@@ -94,7 +94,7 @@ class Viatura(models.Model):
 class Zona(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     parqueid = models.ForeignKey(Parque, models.CASCADE, db_column='ParqueID')  # Field name made lowercase.
-    numero_da_zona = models.IntegerField(db_column='Numero da zona', unique=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    numero_da_zona = models.IntegerField(db_column='Numero da zona', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     lugares = models.IntegerField(db_column='Lugares')  # Field name made lowercase.
     tipo_de_zona = models.CharField(db_column='Estado', max_length=255, blank=True, null=True)
 
@@ -120,7 +120,7 @@ class Lugar(models.Model):
     contratoid = models.ForeignKey(Contrato, models.CASCADE, db_column='ContratoID', null=True)  # Field name made lowercase.
     viaturaid = models.ForeignKey(Viatura, models.CASCADE, db_column='ViaturaID', null=True)  # Field name made lowercase.
     reservaid = models.ForeignKey(Reserva, models.CASCADE, db_column='ReservaID', null=True)  # Field name made lowercase.
-    numero_do_lugar = models.IntegerField(db_column='Numero do lugar', unique=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    numero_do_lugar = models.IntegerField(db_column='Numero do lugar', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     estado = models.CharField(db_column='Estado', max_length=255, default="Disponivel")  # Field name made lowercase.
 
     def get_absolute_url(self):

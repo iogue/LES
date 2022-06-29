@@ -1,16 +1,20 @@
+import imp
 from django.shortcuts import get_object_or_404, render
 from django.views import View
+from django_tables2 import SingleTableView
 
 from django.views.generic import (
-    ListView, 
     DetailView,
     CreateView,
     UpdateView,
     DeleteView
     )
 
+from parque.tables import ParqueTable, ZonaTable, LugarTable
+
 from .forms import ParqueModelForm, ZonaModelForm, LugarModelForm, ReclamacaoModelForm, ParqueModelFormCreate, LugarModelFormCreate
 from .models import Parque, Zona, Lugar, Reclamacao
+from . tables import ParqueTable
 
 def index_view(request, *args, **kwargs):
     return render(request, "home.html", {})
@@ -55,9 +59,19 @@ class ParqueCreateView(CreateView):
 
 
 
-class ParqueListView(ListView):
+# class ParqueListView(ListView):
+#     template_name = 'parque/parque_list.html'
+#     queryset = Parque.objects.all()
+
+class ParqueListView(SingleTableView):
+    model=Parque
+    table_class=ParqueTable
     template_name = 'parque/parque_list.html'
-    queryset = Parque.objects.all()
+
+    def parque_list(request):
+        table = ParqueTable(Parque.objects.all())
+        return render(request, "parque_list.html",{"table":table})
+
 
 
 
@@ -99,13 +113,26 @@ class ParqueDeleteView(DeleteView):
 #==================================================================================================
 #Zona
 
-class ZonaListView(ListView):
+# class ZonaListView(ListView):
+#     template_name = 'zona/zona_list.html'
+#     model = Zona
+
+#     def get_queryset(self):
+#         parque=Parque.objects.get(id=self.kwargs["id"])
+#         return Zona.objects.filter(parqueid=parque)
+
+class ZonaListView(SingleTableView):
+    model=Zona
+    table_class=ZonaTable
     template_name = 'zona/zona_list.html'
-    model = Zona
 
     def get_queryset(self):
         parque=Parque.objects.get(id=self.kwargs["id"])
         return Zona.objects.filter(parqueid=parque)
+
+    def zona_list(request):
+        table = ZonaTable(Zona.objects.all())
+        return render(request, "zona_list.html",{"table":table})
 
 
 
@@ -165,13 +192,26 @@ class ZonaDeleteView(DeleteView):
 #==================================================================================================
 #Lugar
 
-class LugarListView(ListView):
+# class LugarListView(ListView):
+#     template_name = 'lugar/lugar_list.html'
+#     model = Lugar
+
+#     def get_queryset(self):
+#         zona=Zona.objects.get(id=self.kwargs["pk"])
+#         return Lugar.objects.filter(zonaid=zona)
+
+class LugarListView(SingleTableView):
+    model=Lugar
+    table_class=LugarTable
     template_name = 'lugar/lugar_list.html'
-    model = Lugar
 
     def get_queryset(self):
         zona=Zona.objects.get(id=self.kwargs["pk"])
         return Lugar.objects.filter(zonaid=zona)
+
+    def zona_list(request):
+        table = LugarTable(Lugar.objects.all())
+        return render(request, "lugar_list.html",{"table":table})
 
 
 
